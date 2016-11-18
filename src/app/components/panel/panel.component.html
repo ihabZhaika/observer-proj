@@ -1,0 +1,83 @@
+
+<nav>
+  <div class="navbar-fixed">
+    <a href="#" class="brand-logo center">Logo</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="sass.html">Sass</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <li><a href="collapsible.html">JavaScript</a></li>
+    </ul>
+  </div>
+</nav>
+
+<body dir="rtl">
+
+
+<div class="row">
+  <div class="col s10">
+    <div class="row">
+      <div class="col s4">A</div>
+      <div class="col s4">B</div>
+      <div class="col s4">C</div>
+    </div>
+
+    body
+
+    <!--<router-outlet></router-outlet>-->
+
+    <select materialize="material_select" [materializeSelectOptions]="selectOptions">
+      <option value="" disabled selected>أختيار</option>
+      <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+    </select>
+
+    <!-- Modal Trigger -->
+    <a class="waves-effect waves-light btn modal-trigger" (click)="openModal()">Modal</a>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+      <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+
+    <a materialize="tooltip" class="btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="I am tooltip">Hover me!</a>
+
+  </div>
+  <div class="col s2">
+    <img  style="max-width:100%;max-height:100%;"  src="http://leechanggroup.com/wp-content/uploads/2016/03/logo-placeholder.png" alt="logo" alt="">
+
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">filter_drama</i> Admin </div>
+        <div class="collapsible-body">
+          <div class="collection">
+            <a href="panel/admin" class="collection-item">Panel</a>
+            <a href="#!" class="collection-item">View</a>
+          </div>
+
+        </div>
+
+
+
+
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">place</i>Customers</div>
+        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+      </li>
+    </ul>
+
+
+  </div>
+</div>
+
+</body>

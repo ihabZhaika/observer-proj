@@ -1,0 +1,17 @@
+.select-wrapper input.select-dropdown
+{
+  padding-right: 10px !important;
+}
+.row .col{
+  /*display: inline-table !important;*/
+  float: right;
+}
+
+input.ng-invalid.ng-touched{
+  border-bottom: solid red 1px;
+}
+
+input.ng-valid.ng-touched{
+  border-bottom: solid green 1px;
+}
+

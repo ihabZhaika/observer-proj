@@ -1,0 +1,12 @@
+<html dir="rtl">
+<h1>{{ 'TITLE' | translate:lang }}</h1>
+
+<h3>{{ 'CHANGE_COUNTRY' | translate:lang }}</h3>
+
+<a (click)="selectLocale('en', 'US', 'USD');">United States</a>
+<a (click)="selectLocale('ar', 'AR', 'EUR');">arabic</a>
+
+<router-outlet></router-outlet>
+
+
+</html>

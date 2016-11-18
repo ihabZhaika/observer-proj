@@ -1,0 +1,23 @@
+{
+  "TITLE": "تجربة",
+  "CHANGE_COUNTRY": "تغيير المدينة",
+  "ADD_COMMODITY":"أضافة بضاعة",
+  "ADD_CUSTOMER":"أضافة زبون",
+  "CUSTOMER":"زبون",
+  "COMMODITY":"بضاعة",
+  "TYPE_NUMBER":"رقم الصنف",
+  "CUSTOMER_NUMBER":"رقم الزبون",
+  "NAME":"الأسم",
+  "PRICE":"السعر",
+  "GLOBAL_SEARCH":"البحث العام",
+  "SAVE":"حفظ",
+  "CANCEL":"الغاء",
+  "ADD":"أضافة",
+  "EDIT":"تعديل",
+  "REMOVE":"حذف",
+  "CUSTOMERS":"الزبائن",
+  "PHONE":"التلفون",
+  "BALANCE":"الرصيد",
+  "SHIFTS":"النقلات",
+  "PAYMENTS":"الدفعات"
+}
