@@ -14,4 +14,8 @@ input.ng-invalid.ng-touched{
 input.ng-valid.ng-touched{
   border-bottom: solid green 1px;
 }
+.ui-datepicker
+{
+  position: static !important;
+}
 

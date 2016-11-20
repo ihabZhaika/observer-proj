@@ -9,16 +9,18 @@ import { LocaleModule, LocalizationModule } from 'angular2localization';
 import { AdminComponent } from './components/admin/admin.component';
 import {routing} from "./Routes/app.routes";
 import { PanelComponent } from './components/panel/panel.component'
-import {DataTableModule,SharedModule,ContextMenuModule,InputTextModule,MultiSelectModule,AutoCompleteModule} from 'primeng/primeng';
+import {DataTableModule,SharedModule,ContextMenuModule,InputTextModule,CalendarModule} from 'primeng/primeng';
 import { CommoditiesComponent } from './components/commodities/commodities.component';
 import {DataService} from "./services/data/data.service";
 import {UtilsService} from "./services/utils.service";
 import { CustomerComponent } from './components/customer/customer.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { CarComponent } from './components/car/car.component';
+import { ShiftComponent } from './shift/shift.component';
 
 @NgModule({
   declarations: [
-    AppComponent,MaterializeDirective, AdminComponent, PanelComponent, CommoditiesComponent, CustomerComponent
+    AppComponent,MaterializeDirective, AdminComponent, PanelComponent, CommoditiesComponent, CustomerComponent, CarComponent, ShiftComponent
   ],
   imports: [
     BrowserModule,
@@ -33,8 +35,8 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     ContextMenuModule,
     InputTextModule,
     ReactiveFormsModule,
-    MultiSelectModule,
-    Ng2AutoCompleteModule
+    Ng2AutoCompleteModule,
+    CalendarModule
   ],
   providers: [DataService,UtilsService],
   bootstrap: [AppComponent]

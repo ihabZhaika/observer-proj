@@ -9,7 +9,6 @@ import {Fuel} from "./Fuel";
  */
 export interface Vehicle
 {
-    id? : string;
     plateNumber:number;
     model : string;
     productionYear:number

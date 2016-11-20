@@ -14,14 +14,6 @@ import {Customer} from "../../../models/dataModels/Customer";
              styleUrls: ['commodities.component.css']
            })
 export class CommoditiesComponent  extends Locale implements OnInit,Crud  {
-  // @Input('source') set source(value:Commodity[])
-  // {
-  //   this.commodities=value;
-  // }
-  // @Output('sourceChange') sourceChange = new EventEmitter();
-  // @Output('update')onUpdate = new EventEmitter();
-  // @Output('remove')onRemove =  new EventEmitter();
-  // @Output('create')onCreate =  new EventEmitter();
   @Input('parent') parent:Customer=null;
   @ViewChild("cMenu")cMenu:ElementRef;
 
@@ -34,17 +26,67 @@ export class CommoditiesComponent  extends Locale implements OnInit,Crud  {
   editObjectIndex=-1;
   form : FormGroup;
   columns :any;
+  //used by the template
   selectedCommodity:Commodity;
-  d1=["a","b"];
-  d:any;
+
+  modalActions = new EventEmitter<string|MaterializeAction>();
+
   constructor(public localization: LocalizationService,private fb:FormBuilder,private data:DataService)
   {
     super(null, localization);
     this.commoditiesSource = this.data.readCommodities();
   }
+  ngOnInit()
+  {
+
+    this.localization.translationChanged.subscribe(
+      () => {
+        this.columns[0].header = this.localization.translate('TYPE_NUMBER');
+        this.columns[1].header = this.localization.translate('NAME');
+        this.columns[2].header = this.localization.translate('PRICE');
+        this.items[0].label = this.localization.translate('EDIT');
+        this.items[1].label = this.localization.translate('REMOVE');
+
+        console.log("Language triggered");
+      });
+
+    this.columns =[
+
+      {field:"no"                 ,filter:"true" ,sortable:"true" },
+      {field:"name"               ,filter:"true" ,sortable:"true"},
+      {field:"price"              ,filter:"true" ,sortable:"true"}
+
+    ];
 
 
-  modalActions = new EventEmitter<string|MaterializeAction>();
+
+    this.items = [
+      {label: "EDIT", icon: 'fa-search', command: (event) => this.showEdit()},
+      {label: "REMOVE", icon: 'fa-close', command: (event) => this.remove()}
+    ];
+
+    if(this.parent)
+    {
+      this.commodities=this.parent.commodities;
+      this.form=this. fb.group({
+                                 no:[,Validators.required],
+                                 name:[,Validators.required],
+                                 price:['',Validators.required],
+                               });
+    }
+    else
+    {
+      this.commodities = this.commoditiesSource;
+      this.form=this.fb.group({
+                                name:['',Validators.required],
+                                price:['',Validators.required],
+                              });
+    }
+
+  }
+
+
+
   openModal() {
     this.modalActions.emit({action:"modal",params:['open']});
   }
@@ -71,8 +113,6 @@ export class CommoditiesComponent  extends Locale implements OnInit,Crud  {
     //API CALL
     this.commodities.splice(this.commodities.indexOf(this.selectedRow),1);
 
-    //if passed
-    // this.sourceChange.emit(this.commodities);
   }
 
   update()
@@ -80,8 +120,6 @@ export class CommoditiesComponent  extends Locale implements OnInit,Crud  {
     this.commodities[this.editObjectIndex]=this.form.value;
     this.closeModal();
 
-    //if passed
-    // this.sourceChange.emit(this.commodities);
   }
 
   read()
@@ -96,64 +134,8 @@ export class CommoditiesComponent  extends Locale implements OnInit,Crud  {
     this.commodities.push(commodity);
     this.closeModal();
 
-    //if passed
-    // this.parent.commodities.push(commodity);
-    // this.sourceChange.emit(this.commodities);
-    // console.log(data);
-    // this.dataService.addCommodity(data).subscribe(data=>this.result=data,error=>this.result=error);
   }
 
 
-  ngOnInit()
-  {
-
-    this.localization.translationChanged.subscribe(
-      () => {
-        this.columns[0].header = this.localization.translate('TYPE_NUMBER');
-        this.columns[1].header = this.localization.translate('NAME');
-        this.columns[2].header = this.localization.translate('PRICE');
-      });
-
-    this.columns =[
-
-      {field:"no"                 ,filter:"true" ,sortable:"true" },
-      {field:"name"               ,filter:"true" ,sortable:"true"},
-      {field:"price"              ,filter:"true" ,sortable:"true"}
-
-    ];
-
-
-
-    this.items = [
-      {label: this.localization.translate('EDIT',{},this.localization.languageCode), icon: 'fa-search', command: (event) => this.showEdit()},
-      {label: this.localization.translate("REMOVE"), icon: 'fa-close', command: (event) => this.remove()}
-    ];
-
-    if(this.parent)
-    {
-      this.commodities=this.parent.commodities;
-      if(!this.commodities)
-      {
-        console.log("Why its null ?",this.commodities);
-      }
-      this.form=this. fb.group({
-                                 no:[,Validators.required],
-                                 name:[,Validators.required],
-                                 price:['',Validators.required],
-                               });
-    }
-    else
-    {
-      this.commodities = this.commoditiesSource;
-      this.form=this.fb.group({
-                           name:['',Validators.required],
-                           price:['',Validators.required],
-                         });
-
-    }
-
-
-
-  }
 
 }

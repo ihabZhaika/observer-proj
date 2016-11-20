@@ -1,0 +1,134 @@
+<!-- Modal Trigger -->
+<br>
+<a class="waves-effect waves-light btn modal-trigger" (click)="openModal()">{{'ADD_CAR'|translate:lang}}</a>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+  <div class="modal-content">
+
+    <h4>
+      <ng-container *ngIf="!isEdit">  {{'ADD'|translate:lang}}</ng-container>
+      <ng-container *ngIf="isEdit">  {{'EDIT'|translate:lang}} </ng-container>
+      {{'CAR'|translate:lang}}
+    </h4>
+
+    <form novalidate [formGroup]="form">
+
+      <div class="row" >
+
+        <div class="row col s2">
+          <div class="row">
+            <label >{{'PLATE_NUMBER'|translate:lang}}</label>
+          </div>
+          <div class="row">
+            <input name="'NAME'|translate:lang" [placeholder]="'PLATE_NUMBER'|translate:lang" formControlName="plateNumber" type="text" >
+          </div>
+        </div>
+
+        <div class="row col s2">
+          <div class="row">
+            <label >{{'MODEL'|translate:lang}}</label>
+          </div>
+          <div class="row">
+            <input name="'NAME'|translate:lang" [placeholder]="'MODEL'|translate:lang" formControlName="model" type="text" >
+          </div>
+        </div>
+
+        <div class="row col s2">
+          <div class="row">
+            <label >{{'PRODUCTION_YEAR'|translate:lang}}</label>
+          </div>
+          <div class="row">
+            <input name="'NAME'|translate:lang" [placeholder]="'PRODUCTION_YEAR'|translate:lang" formControlName="productionYear" type="text" >
+          </div>
+        </div>
+
+        <div class="row col s2">
+          <div class="row">
+            <label >{{'LICENSE_EXPIRY_DATE'|translate:lang}}</label>
+          </div>
+          <div class="row">
+            <p-calendar  formControlName="licenseExpiryDate" [placeholder]="'LICENSE_EXPIRY_DATE'|translate:lang" dateFormat="dd/mm/yy"></p-calendar>
+
+            <!--<input name="'NAME'|translate:lang" [placeholder]="'LICENSE_EXPIRY_DATE'|translate:lang"type="text" >-->
+          </div>
+        </div>
+
+        <div class="row col s2">
+          <div class="row">
+            <label >{{'MONTHLY_CHECK_DATE'|translate:lang}}</label>
+          </div>
+          <div class="row">
+            <input name="'NAME'|translate:lang" [placeholder]="'MONTHLY_CHECK_DATE'|translate:lang" formControlName="monthlyCheckDate" type="text" >
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" [ngClass]="{'disabled':form.invalid}" *ngIf="!isEdit" (click)="add()">{{'ADD'|translate:lang}}</a>
+    <a class="waves-effect waves-green btn-flat" [ngClass]="{'disabled':form.invalid}" *ngIf="isEdit" (click)="update()">{{'EDIT'|translate:lang}}</a>
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="closeModal()">{{'CANCEL'|translate:lang}}</a>
+  </div>
+</div>
+
+
+<!--THE TABLE-->
+
+<div class="ui-widget-header ui-helper-clearfix" style="padding:4px 10px;border-bottom: 0 none">
+  <i class="fa fa-search" style="float:left;margin:4px 4px 0 0"></i>
+  <input #globalFilter type="text" pInputText size="50" style="float:left" [placeholder]="'GLOBAL_SEARCH'|translate:lang">
+</div>
+<p-dataTable [value]="cars"  selectionMode="single" [globalFilter]="globalFilter" [rows]="15"
+             scrollable="true" [paginator]="true"     [(selection)]="selectedRow" [contextMenu]="cMenu"
+             [globalFilter]="globalFilter" sortMode="multiple" expandableRows="true"  >
+
+
+
+  <template let-car >
+    <div style="text-align: right;background-color: lightgray">
+
+      <div class="row">
+
+        <div class="col s12">
+          <ul class="tabs" materialize="tabs" style="background-color: lightblue">
+            <li class="tab col s2"><a  class="active" href="#car_shifts">{{'SHIFTS' | translate:lang }}</a></li>
+            <li class="tab col s2"><a href="#car_repairs"  >{{'REPAIRS' | translate:lang }}</a></li>
+            <li class="tab col s2"><a href="#car_expenses">{{'EXPENSES' | translate:lang }} </a></li>
+            <li class="tab col s2"><a href="#car_fuel">{{'FUEL' | translate:lang }} </a></li>
+            <li class="tab col s2"><a href="#car_driving_records">{{'DRIVING_RECORDS' | translate:lang }} </a></li>
+          </ul>
+        </div>
+
+
+        <div id="car_shifts" class="col s12">
+          <app-shift [parent]="car"></app-shift>
+        </div>
+        <div id="car_repairs" class="col s12"> REPAIRS over here</div>
+        <div id="car_expenses" class="col s12"> EXPENSES over here</div>
+        <div id="car_fuel" class="col s12"> FUEL over here</div>
+        <div id="car_driving_records" class="col s12"> DRIVING_RECORDS over here</div>
+
+      </div>
+    </div>
+
+  </template>
+
+  <p-column expander="true" styleClass="col-icon" ></p-column>
+
+  <p-column field="plateNumber"    [filter]="true" [sortable]="true" [header]="'PLATE_NUMBER' | translate:lang"></p-column>
+  <p-column field="model"  [filter]="true" [sortable]="true" [header]="'MODEL' | translate:lang">
+  </p-column>
+  <p-column field="productionYear" [filter]="true" [sortable]="true" [header]="'PRODUCTION_YEAR' | translate:lang"></p-column>
+  <p-column field="licenseExpiryDate" [filter]="true" [sortable]="true" [header]="'LICENSE_EXPIRY_DATE' | translate:lang">
+    <template let-col let-car="rowData" pTemplate type="body">
+      {{car[col.field]|date:'d/M/y'}}
+    </template>
+  </p-column>
+  <p-column field="monthlyCheckDate" [filter]="true" [sortable]="true" [header]="'MONTHLY_CHECK_DATE' | translate:lang"></p-column>
+
+</p-dataTable>
+
+<p-contextMenu #cMenu [model]="items"></p-contextMenu>

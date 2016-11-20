@@ -16,12 +16,12 @@ export interface Shift
     date:number;
     createDate:Date;
     commodityType:Commodity;
-    description:string;
     totalPurchasePrice:number;
     sellingPrice:number;
     totalSellingPrice:number;
     driver : Person;
     quantity:number;
     profitMargin:number;
+    notes:string;
 
 }

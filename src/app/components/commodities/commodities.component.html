@@ -1,9 +1,6 @@
 <!--THE MODEL-->
 
-
 <!-- Modal Trigger -->
-{{form.value | json}}
-{{try}}
 <br>
 <a class="waves-effect waves-light btn modal-trigger" (click)="openModal()">{{'ADD_COMMODITY'|translate:lang}}</a>
 
@@ -98,11 +95,11 @@
              scrollable="true" [paginator]="true"     [(selection)]="selectedRow" [contextMenu]="cMenu"
              [globalFilter]="globalFilter" sortMode="multiple">
 
-  <!--<p-column *ngFor="let col of columns"  [field]="col.field" [header]="col.header" [filter]="col.filter" [sortable]="col.sortable" > </p-column>-->
+  <p-column *ngFor="let col of columns"  [field]="col.field" [header]="col.header" [filter]="col.filter" [sortable]="col.sortable" > </p-column>
 
-  <p-column field="no"    [filter]="true" [sortable]="true" [header]="'TYPE_NUMBER' | translate:lang"></p-column>
-  <p-column field="name"  [filter]="true" [sortable]="true" [header]="'NAME' | translate:lang"></p-column>
-  <p-column field="price" [filter]="true" [sortable]="true" [header]="'PRICE' | translate:lang"></p-column>
+  <!--<p-column field="no"    [filter]="true" [sortable]="true" [header]="'TYPE_NUMBER' | translate:lang"></p-column>-->
+  <!--<p-column field="name"  [filter]="true" [sortable]="true" [header]="'NAME' | translate:lang"></p-column>-->
+  <!--<p-column field="price" [filter]="true" [sortable]="true" [header]="'PRICE' | translate:lang"></p-column>-->
 
 </p-dataTable>
 

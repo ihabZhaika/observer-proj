@@ -116,7 +116,8 @@
   <input #globalFilter type="text" pInputText size="50" style="float:left" [placeholder]="'GLOBAL_SEARCH'|translate:lang">
 </div>
 <p-dataTable [value]="customers"  selectionMode="single" [globalFilter]="globalFilter" [rows]="15"  expandableRows="true"
-             scrollable="true" [paginator]="true"     [(selection)]="selectedRow" [contextMenu]="cMenu" sortMode="multiple">
+             scrollable="true" [paginator]="true"     [(selection)]="selectedRow" [contextMenu]="cMenu" sortMode="multiple"
+             expandableRows="true">
   <p-column expander="true" styleClass="col-icon" ></p-column>
   <!--<p-column *ngFor="let col of columns"  [field]="col.field" [header]="col.header" [filter]="col.filter" [sortable]="col.sortable"> </p-column>-->
 
@@ -157,8 +158,4 @@
 </p-dataTable>
 
 <p-contextMenu #cMenu [model]="items"></p-contextMenu>
-
-
-{{selectOptions}}
-
 

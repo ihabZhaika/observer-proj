@@ -4,10 +4,10 @@ import {Commodity} from "./Commodity";
  */
 export interface Location
 {
-    id? : string;
+    no? : number;
     name : string;
     // location:string;
-    commodities :Commodity[];
+    // commodities :Commodity[];
 
 
 }

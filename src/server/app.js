@@ -1,9 +1,10 @@
 var express = require('express');
 var path = require('path');
 var morgan = require('morgan'); // logger
-var bodyParser = require('body-parser');
-
 var app = express();
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(__dirname + '/../../dist'));
@@ -28,6 +29,7 @@ db.once('open', function() {
 
   // create
   app.post('/commodity', function(req, res) {
+    console.log(req.params);
     var obj = new commodity(req.body);
     console.log(obj);
     obj.save(function(err, obj) {
@@ -36,7 +38,11 @@ db.once('open', function() {
     });
   });
 
-  // APIs
+  app.get('/commodity', function(req, res)
+  {
+    console.log(req.query.name);
+  });
+    // APIs
   // // select all
   // app.get('/cats', function(req, res) {
   //   Cat.find({}, function(err, docs) {

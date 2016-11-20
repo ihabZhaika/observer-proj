@@ -25,10 +25,9 @@ export class CustomerComponent extends Locale implements OnInit ,Crud{
   isEdit:boolean=false;
   editObjectIndex=-1;
   form : FormGroup;
-  commodities:SelectItem[]=[];
-  selected:Commodity[]=[];
-  formCommodities:FormArray ;
+  // selected:Commodity[]=[];
   columns :any;
+  // formCommodities:FormArray ;
 
   constructor(public localization: LocalizationService,private fb:FormBuilder,private data:DataService)
   {
@@ -46,29 +45,26 @@ export class CustomerComponent extends Locale implements OnInit ,Crud{
                        });
     //                         commodities:fb.array([])
 
-    this.formCommodities=<FormArray>this.form.controls['commodities'];
+    // this.formCommodities=<FormArray>this.form.controls['commodities'];
     let commodities:Commodity[] = data.readCommodities();
+    //TODO : REMOVE WHEN HAVE API
     for (let item of commodities)
     {
       item.price=0;
-      this.commodities.push({label:item.name,value:item});
 
     }
 
-
-
   }
-  addCommodity(commodity:Commodity)
-  {
-    this.formCommodities.push(this.fb.group({
-                                              no:[commodity.no,Validators.required],
-                                              name:[commodity.name,Validators.required],
-                                              price:[commodity.price,Validators.required],
-                                            }));
-  }
+  // addCommodity(commodity:Commodity)
+  // {
+  //   this.formCommodities.push(this.fb.group({
+  //                                             no:[commodity.no,Validators.required],
+  //                                             name:[commodity.name,Validators.required],
+  //                                             price:[commodity.price,Validators.required],
+  //                                           }));
+  // }
 
   modalActions = new EventEmitter<string|MaterializeAction>();
-  selectActions = new EventEmitter<string|MaterializeAction>();
 
   openModal() {
     this.modalActions.emit({action:"modal",params:['open']});
@@ -79,8 +75,8 @@ export class CustomerComponent extends Locale implements OnInit ,Crud{
     this.modalActions.emit({action:"modal",params:['close']});
     this.editObjectIndex=-1;
     this.isEdit=false;
-    this.formCommodities.controls=[];
-    this.selected=[];
+    // this.formCommodities.controls=[];
+    // this.selected=[];
     // this.form.get("select").enable();
     this.form.reset();
   }
@@ -95,13 +91,12 @@ export class CustomerComponent extends Locale implements OnInit ,Crud{
     console.log(this.form.value);
     console.log(this.selectedRow);
     this.form.patchValue(this.selectedRow);
-    let select :SelectItem[]=[];
-    for(let commodity of  this.selectedRow.commodities)
-    {
-      select.push({label:commodity.name,value:commodity});
-      this.addCommodity(commodity);
-    }
-    this.form.patchValue({select:[this.commodities[0].value]});
+    // let select :SelectItem[]=[];
+    // for(let commodity of  this.selectedRow.commodities)
+    // {
+    //   select.push({label:commodity.name,value:commodity});
+    //   // this.addCommodity(commodity);
+    // }
 
 
     this.isEdit=true;
@@ -128,7 +123,6 @@ export class CustomerComponent extends Locale implements OnInit ,Crud{
 
   add()
   {
-    // this.form.get("select").disable();
     console.log(this.form.value);
     let customer:Customer = this.form.value;
     customer.commodities=[];
@@ -136,7 +130,7 @@ export class CustomerComponent extends Locale implements OnInit ,Crud{
     customer.renovations=[];
     console.log(JSON.stringify(customer));
     this.customers.push(customer);
-    console.log(this.selected);
+    // console.log(this.selected);
     this.closeModal();
 
     // console.log(data);

@@ -8,8 +8,8 @@ export interface  Customer
 {
     no ?: number;
     name : string;
-    phone : string;
-    balance: number;
+    phone ?: string;
+    balance?: number;
     payments? : Payment[];
     renovations? : Location[];
     commodities?:Commodity[];
